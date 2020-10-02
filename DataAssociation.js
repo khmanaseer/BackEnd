@@ -41,8 +41,23 @@ Data.findById(req.params.id, function(err, data){
 
 
 
-============last step =============
-//It has to be populated in the data base in order to be used and that is done by using
+============4th step =============
+//It has to be populated in the data base show route in order to be used and that is done by using
 data.findById(req.params.id).populate("comments").exec(function(err,foundedData){
 
+
+============last step =============  
+in the view ejs show file, it has to be called to be used with forEach
+<% data.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author %></strong>
+                            <span class="pull-right">10 days ago</span>
+                            <p>
+                                <%= comment.text %> 
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>     
+ 
 Thats it!!!
