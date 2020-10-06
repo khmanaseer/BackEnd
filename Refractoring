@@ -1,0 +1,42 @@
+==============1st Step===============
+//creating  routes directory with the associated routes in it
+//verifiy router so we can exports it
+const express = require("express")
+const router  = express.Router()
+
+//all Models have to be called ad make attention to the new directory 
+const Gallery = require("../models/gallery")
+
+//all app Routes have to be replaced by router instead
+module.exports = router //at the end of the file
+
+
+==============2nd Step===============
+//they have to be required in app.js file using
+const galleryRoutes = require(./routes)
+//then it has to be used in the app for each router
+app.use(galleryRoutes)
+
+==============3rd Step===============
+//isLoggedIn has to be identified also in all these routes
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
+
+==============4th Step===============
+since index file has authntication Router, passport has to be identified with User
+const passport = require("passport")
+const User	   = require('../models/user')
+
+==============5th Step===============
+currentUser has to be called in each router in order for the Navbar to work
+router.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
+});
+
+==============last Step===============
+//The most important thing is having all the above identified after pssport configuration
